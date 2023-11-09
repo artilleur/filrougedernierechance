@@ -65,7 +65,7 @@ class PaymentController extends AbstractController
 
      // Calculate TVA based on user's role
  if ($this->isGranted('ROLE_USER')) {
-    $tva = 20;
+    $tva =20 ;
 } else {
     $tva = 0;
 }
@@ -76,9 +76,9 @@ $totaltva +=round( $soustotal+($soustotal*$tva/100),2);
 $producStripe[] = [
     'price_data' => [
         'currency' => 'eur',
-        'unit_amount' => $totaltva * 100,
+        'unit_amount' => round(($soustotal*$tva/100),2) * 100,
         'product_data' => [
-            'name' => 'total ttc'
+            'name' => 'tva'
         ]
     ],
     'quantity' => 1,
