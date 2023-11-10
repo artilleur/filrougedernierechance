@@ -52,10 +52,10 @@ class CommandeController extends AbstractController
 
 if ($this->isGranted('ROLE_ADMIN')) {
 
-    $tva = 0; // TVA rate (20%)
+    $tva = 20; // TVA rate (20%)
 } elseif ($this->isGranted('ROLE_COMMERCIAL')) {
     
-    $tva = 0; 
+    $tva = 20; 
 
 } elseif ($this->isGranted('ROLE_COMMERCE')) {
     
@@ -134,10 +134,10 @@ elseif ($this->isGranted('ROLE_USER')) {
 
 if ($this->isGranted('ROLE_ADMIN')) {
 
-   $tva = 0; // TVA rate (20%)
+   $tva = 20; // TVA rate (20%)
 } elseif ($this->isGranted('ROLE_COMMERCIAL')) {
    
-   $tva = 0; 
+   $tva = 20; 
 
 } elseif ($this->isGranted('ROLE_COMMERCE')) {
    

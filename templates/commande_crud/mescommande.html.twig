@@ -15,8 +15,8 @@
                 <th>produits</th>
                 <th>prix</th>
                 <th>quantite</th>
-                {# <th>Commentaire</th> #}
-                {# <th>actions</th> #}
+                 <th>adresse livraison</th> 
+                 <th>adresse_facturation</th> 
             </tr>
         </thead>
         <tbody>
@@ -27,6 +27,8 @@
                 <td>{{ commande.p_nom }}</td>
                 <td>{{ commande.prix }}</td>
                  <td>{{ commande.quantite }}</td>
+                 <td>{{ commande.adresse_livraison }}</td>
+                 <td>{{ commande.adresse_facturation }}</td>
                  
                  
 

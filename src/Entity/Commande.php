@@ -45,10 +45,14 @@ class Commande
     #[ORM\Column(length: 255)]
     private ?string $commentaire = null;
 
+    #[ORM\OneToMany(mappedBy: 'adresse_facturation', targetEntity: Facture::class)]
+    private Collection $factures;
+
     public function __construct()
     {
         $this->commandeDetails = new ArrayCollection();
         $this->date_commande= new  \DateTimeImmutable( );
+        $this->factures = new ArrayCollection();
     }
 
     
@@ -151,6 +155,36 @@ class Commande
     public function setCommentaire(string $commentaire): static
     {
         $this->commentaire = $commentaire;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Facture>
+     */
+    public function getFactures(): Collection
+    {
+        return $this->factures;
+    }
+
+    public function addFacture(Facture $facture): static
+    {
+        if (!$this->factures->contains($facture)) {
+            $this->factures->add($facture);
+            $facture->setAdresseFacturation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFacture(Facture $facture): static
+    {
+        if ($this->factures->removeElement($facture)) {
+            // set the owning side to null (unless already changed)
+            if ($facture->getAdresseFacturation() === $this) {
+                $facture->setAdresseFacturation(null);
+            }
+        }
 
         return $this;
     }

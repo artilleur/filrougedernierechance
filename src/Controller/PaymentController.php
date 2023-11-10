@@ -5,6 +5,7 @@ namespace App\Controller;
 use Stripe\Stripe;
 use App\Entity\Produit;
 use App\Entity\Commande;
+use App\Entity\Facture;
 use App\Entity\Transporteur;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -162,7 +163,12 @@ $checkout_session = \Stripe\Checkout\Session::create([
     public function StripeSuccess(EntityManagerInterface $em,$id): Response{
         $order = $this->em->getRepository(Commande::class)->findOneBy(['id' => $id]);
         //$order->setComIsPaid(true);
+        $facture=new Facture();
+        $facture->setClient($this->getUser());
+        $facture->setAdresseLivraison($facture->getAdresseLivraison());
+
         $em->persist($order);
+        $em->persist($facture);
         $em->flush();
         //return $this->render('order/succes.html.twig');
         return $this->render('commande/success.html.twig');
